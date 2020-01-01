@@ -1,3 +1,3 @@
 const router = () => {
-  alert(window.location.pathname);
+  //alert(window.location.pathname);
 };
