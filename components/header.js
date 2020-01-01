@@ -14,10 +14,11 @@ var navbar = e(
 var jumboTron = e(
   ReactBootstrap.Jumbotron,
   {},
-  
+  [
     e('p', {}, 'Just a simple paragraph. Hello everybody!'),
-    e(ReactBootstrap.Button, {variant: 'danger'}, 'The Danger button!')
-  
+    e('h3', {}, `The Time is: ${new Date().toTimeString()}`),
+    e(ReactBootstrap.Button, {variant: 'danger'}, 'The Danger button!'),
+  ]
 );
 
 
@@ -27,10 +28,22 @@ var bootStrapElement = e(
   'This is a Bootstrap Alert!'
 );
 
-var testElement = e(
+const generateElement = () => e(
   'div',
   {},
-  navbar, bootStrapElement, jumboTron, 'Howdly diddly ding dong doodly!'
+  navbar, 
+  bootStrapElement,
+  //jumboTron,
+  e(
+    ReactBootstrap.Jumbotron,
+    {},
+    [
+      e('p', {}, 'Just a simple paragraph. Hello everybody!'),
+      e('h3', {}, `The Time is: ${new Date().toTimeString()}`),
+      e(ReactBootstrap.Button, {variant: 'danger'}, 'The Danger button!'),
+    ]
+  ),
+  'Howdly diddly ding dong doodly!'
 );
 
 

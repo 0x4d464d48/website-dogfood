@@ -18,12 +18,19 @@
     <script src="./router/router.js"></script>
     <script>
 
-      ReactDOM.render(
-        testElement,
-        document.getElementById('root')
-      );
 
-router();
+function update() {
+  console.log('RUN')
+  ReactDOM.render(
+    generateElement(),
+    document.getElementById('root')
+  );
+}
+
+
+setInterval(update, 1000);
+
+//router();
 
     </script>
   </body>
