@@ -31,7 +31,6 @@ var bootStrapElement = e(
 const generateElement = () => e(
   'div',
   {},
-  navbar, 
   bootStrapElement,
   //jumboTron,
   e(

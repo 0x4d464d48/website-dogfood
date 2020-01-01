@@ -11,26 +11,62 @@
   </head>
   <body>
     <div id="root"></div>
+    <!-- <button onclick="update()">Click me!</button> -->
     <script src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js"></script>
     <script>var e = React.createElement;</script>
     <script>var Alert = ReactBootstrap.Alert;</script>
     <script src="./components/header.js"></script>
+    <script src="./router/routes.js"></script>
     <script src="./router/router.js"></script>
     <script>
 
+      var navbar = e(
+        ReactBootstrap.Navbar,
+        {bg: 'dark', variant: 'dark', expand: 'lg'},
+        [
+          e(ReactBootstrap.Navbar.Brand, {}, 'Ze Brand'),
+          e(ReactBootstrap.Navbar.Toggle, {'aria-controls': 'basic-navbar-nav'}),
+          e(ReactBootstrap.Navbar.Collapse, {id: 'basic-navbar-nav'}, [
+            e(ReactBootstrap.Nav, {}, [
+              e(ReactBootstrap.Nav.Link, {href: '#simplePage', onClick: () => update('#simplePage')}, 'Link 1'),
+              e(ReactBootstrap.Nav.Link, {href: '#jumbotron', onClick: () =>  update('#jumbotron')}, 'Link 2'),
+              e(ReactBootstrap.Nav.Link, {href: '#fail', onClick: () => update('#fail')}, 'Link 3'),
+            ]),
+          ]),
+        ]);
 
-function update() {
-  console.log('RUN')
+        ReactDOM.render(
+          e('div',
+            {},
+            [
+              navbar,
+              e('div', {id: 'view'}),
+            ]),
+          document.getElementById('root')
+        );
+
+        function update(path) {
+          console.log('UPDATE!');
+          ReactDOM.unmountComponentAtNode(document.getElementById('view'));
+          ReactDOM.render(
+            router(path),
+            document.getElementById('view'));
+        }
+
+        /*function update() {
   ReactDOM.render(
-    generateElement(),
+    router(),
     document.getElementById('root')
   );
-}
 
+  clicked = !clicked;
+}*/
 
-setInterval(update, 1000);
+        //update();
 
-//router();
+        //setInterval(update, 1000);
+
+        //router();
 
     </script>
   </body>
