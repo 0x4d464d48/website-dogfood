@@ -20,53 +20,57 @@
     <script src="./router/router.js"></script>
     <script>
 
-      var navbar = e(
-        ReactBootstrap.Navbar,
-        {bg: 'dark', variant: 'dark', expand: 'lg'},
-        [
-          e(ReactBootstrap.Navbar.Brand, {}, 'Ze Brand'),
-          e(ReactBootstrap.Navbar.Toggle, {'aria-controls': 'basic-navbar-nav'}),
-          e(ReactBootstrap.Navbar.Collapse, {id: 'basic-navbar-nav'}, [
-            e(ReactBootstrap.Nav, {}, [
-              e(ReactBootstrap.Nav.Link, {href: '#simplePage', onClick: () => update('#simplePage')}, 'Link 1'),
-              e(ReactBootstrap.Nav.Link, {href: '#jumbotron', onClick: () =>  update('#jumbotron')}, 'Link 2'),
-              e(ReactBootstrap.Nav.Link, {href: '#fail', onClick: () => update('#fail')}, 'Link 3'),
-            ]),
-          ]),
-        ]);
+var navbar = e(
+  ReactBootstrap.Navbar,
+  {bg: 'dark', variant: 'dark', expand: 'lg'},
+  [
+    e(ReactBootstrap.Navbar.Brand, {}, 'Ze Brand'),
+    e(ReactBootstrap.Navbar.Toggle, {'aria-controls': 'basic-navbar-nav'}),
+    e(ReactBootstrap.Navbar.Collapse, {id: 'basic-navbar-nav'}, [
+      e(ReactBootstrap.Nav, {}, [
+        e(ReactBootstrap.Nav.Link, {href: '#simplePage', onClick: () => update('#simplePage')}, 'Link 1'),
+        e(ReactBootstrap.Nav.Link, {href: '#jumbotron', onClick: () =>  update('#jumbotron')}, 'Link 2'),
+        e(ReactBootstrap.Nav.Link, {href: '#fail', onClick: () => update('#fail')}, 'Link 3'),
+      ]),
+    ]),
+  ]);
 
-        ReactDOM.render(
-          e('div',
-            {},
-            [
-              navbar,
-              e('div', {id: 'view'}),
-            ]),
-          document.getElementById('root')
-        );
+ReactDOM.render(
+  e('div',
+    {},
+    [
+      navbar,
+      e('div', {id: 'view'}),
+      e('div', {id: 'sample-response'}),
+    ]),
+  document.getElementById('root')
+);
 
-        function update(path) {
-          console.log('UPDATE!');
-          ReactDOM.unmountComponentAtNode(document.getElementById('view'));
-          ReactDOM.render(
-            router(path),
-            document.getElementById('view'));
-        }
-
-        /*function update() {
+function update(path) {
+  console.log('UPDATE!');
+  ReactDOM.unmountComponentAtNode(document.getElementById('view'));
   ReactDOM.render(
-    router(),
-    document.getElementById('root')
-  );
+    router(path),
+    document.getElementById('view'));
+}
 
-  clicked = !clicked;
-}*/
+fetch('https://jsonplaceholder.typicode.com/posts/')
+  .then((response) => {
+    console.error('BEHOLD!')
+    console.error(response)
+    return response.json();
+  })
+  .then((myJson) => {
+    console.log(myJson);
+    ReactDOM.render(
+    e('pre',
+      {},
+      JSON.stringify(myJson, null, 4)
+    ),
+      document.getElementById('sample-response'))
+  })
+  .catch((error) => console.error(error));
 
-        //update();
-
-        //setInterval(update, 1000);
-
-        //router();
 
     </script>
   </body>
