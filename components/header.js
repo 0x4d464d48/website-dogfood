@@ -1,5 +1,5 @@
 var bootStrapElement = React.createElement(
-  'Alert',
+  Alert,
   {variant: 'primary'},
   'This is a Bootstrap Alert!'
 );
